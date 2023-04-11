@@ -1,3 +1,5 @@
+// A COMMENT THAT WAS NOT THERE BEFORE
+
 const { useState, useEffect } = React;
 
 import exampleVideoData from '../data/exampleVideoData.js'
@@ -46,3 +48,4 @@ var App = ({ searchYouTube }) => {
 // In the ES6 spec, files are "modules" and do not share a top-level scope
 // `var` declarations will only exist globally where explicitly defined
 export default App;
+
