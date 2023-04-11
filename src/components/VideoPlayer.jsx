@@ -1,18 +1,35 @@
-var VideoPlayer = ({ video }) => {
+import VideoDetails from './VideoDetails.js';
+import getVideoDetails from '../lib/getVideoDetails.js';
+const { useState, useEffect } = React;
 
-  const url = `https://www.youtube.com/embed/${video.id.videoId}`;
-  return (
+var VideoPlayer = ({ video }) => {
+  const [videoDetails, setVideoDetails] = Object.keys(video).length !== 0 ? useState({}) : [undefined, undefined];
+  let url;
+  if (Object.keys(video).length !== 0) {
+    url = `https://www.youtube.com/embed/${video.id.videoId}`;
+
+    const debounce = _.debounce(function (id) {
+      getVideoDetails(id, (data) => {
+        console.log('video player', data);
+        setVideoDetails(data);
+      });
+    }, 500);
+
+    // useEffect(() => {
+    //   debounce(video.id.videoId);
+    // }, [video]);
+
+  }
+
+  return (Object.keys(video).length !== 0) ? (
     <div className="video-player">
       <div className="embed-responsive embed-responsive-16by9">
         {/* <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" allowFullScreen></iframe> */}
         <iframe className="embed-responsive-item" src={url} allowFullScreen></iframe>
       </div>
-      <div className="video-player-details">
-        <h3>{video.snippet.title}</h3>
-        <div>{video.snippet.description}</div>
-      </div>
+      <VideoDetails video={video} videoDetails={videoDetails} />
     </div>
-  );
+  ) : <div className="video-player"></div>;
 }
 
 // PropTypes tell other developers what `props` a component expects

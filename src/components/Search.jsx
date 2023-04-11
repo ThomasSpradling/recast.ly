@@ -1,7 +1,11 @@
-var Search = () => (
+var Search = ({ searchText, onChangeSearchText, queryYouTube, onChangeQueryYouTube }) => (
   <div className="search-bar form-inline">
-    <input className="form-control" type="text" />
-    <button className="btn hidden-sm-down">
+    <input
+      className="form-control"
+      type="text"
+      value={searchText}
+      onChange={ (e) => onChangeSearchText(e.target.value)}/>
+    <button className="btn hidden-sm-down" onClick={ (e) => onChangeQueryYouTube(!queryYouTube) }>
       <span className="glyphicon glyphicon-search"></span>
     </button>
   </div>

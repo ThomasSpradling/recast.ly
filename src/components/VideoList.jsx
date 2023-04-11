@@ -1,15 +1,15 @@
 import VideoListEntry from './VideoListEntry.js';
 
 var VideoList = ({ videos, onChangeCurrentVideo }) => {
-  return (
+  return videos.length !== 0 ? (
     <div className="video-list">
       {
-        videos.map((video) => {
-          return <VideoListEntry video={ video } onChangeCurrentVideo={ onChangeCurrentVideo } />
+        videos.map((video, i) => {
+          return <VideoListEntry key={i} video={ video } onChangeCurrentVideo={ onChangeCurrentVideo } />
         })
       }
     </div>
-  );
+  ) : <div className="video-list"></div>;
 };
 
 
